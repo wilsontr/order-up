@@ -13,9 +13,7 @@ const HelpButton = ({ onClick }) => (
 			className="btn btn-danger" 
 			onClick={e => {
 				onClick()
-			}}>
-				Help!
-		</button>
+			}}>Help!</button>
 				
 	</div>
 );

@@ -3,7 +3,7 @@ const moment = require('moment');
 const Inflector = require('inflected');
 
 function getRandomName(names) {
-  let nameIndex = Math.round(Math.random() * names.length);
+  let nameIndex = Math.floor(Math.random() * names.length);
   return _.trim(names[nameIndex]);
 }
 

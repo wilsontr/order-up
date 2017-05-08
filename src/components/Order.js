@@ -23,15 +23,15 @@ let buttonRow = css({
 const Order = ({ id, customerName, customerAddress, courierName, pickupETA, onClick }) => (
 	<li className="col-md-3 col-sm-4" {...orderStyle}>
 		<div className="panel panel-default">
-			<div className="panel-heading">Order #{id}</div>
+			<div className="panel-heading">Order #<span className="order-id">{id}</span></div>
 			<div {...contentsStyle}>
 				<label {...labelStyle}>Customer</label>
-				<div>{customerName}</div>
-				<div>{customerAddress}</div>
+				<div className="customer-name">{customerName}</div>
+				<div className="customer-address">{customerAddress}</div>
 				<label {...labelStyle}>Courier</label>
-				<div>{courierName}</div>
+				<div className="courier-name">{courierName}</div>
 				<label {...labelStyle}>ETA</label>
-				<div>{pickupETA}</div>
+				<div className="pickup-eta">{pickupETA}</div>
 				<div className="text-center" {...buttonRow}>
 					<button 
 						className="btn btn-primary" 

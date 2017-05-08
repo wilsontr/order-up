@@ -7,6 +7,4 @@ const orderApp = combineReducers({
 	modalOpen
 });
 
-console.log(orderApp);
-
 export default orderApp;
