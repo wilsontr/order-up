@@ -2,8 +2,8 @@ import _ from 'lodash';
 import fetch from 'isomorphic-fetch';	
 
 export const ADD_ORDER = 'ADD_ORDER';
-export function addOrder(props) {
-	return { type: 'ADD_ORDER', props };
+export function addOrder(order) {
+	return { type: 'ADD_ORDER', order };
 }
 
 export const CLEAR_ORDER = 'CLEAR_ORDER';
@@ -14,6 +14,24 @@ export function clearOrder(id) {
 export const SET_ACTIVE_STATE = 'SET_ACTIVE_STATE';
 export function setActiveState(newState) {
 	return {type: 'SET_ACTIVE_STATE', newState};
+}
+
+export const REQUEST_SINGLE_ORDER = 'REQUEST_SINGLE_ORDER';
+function requestSingleOrder() {
+	return {
+		type: REQUEST_SINGLE_ORDER
+	}
+}
+export const RECEIVE_SINGLE_ORDER = 'RECEIVE_SINGLE_ORDER';
+function receiveSingleOrder(json) {
+	if ( !json.id ) {
+		throw new Error ("No valid data in response JSON");
+	}
+
+	return {
+		type: RECEIVE_SINGLE_ORDER,
+		order: json
+	}
 }
 
 export const REQUEST_ORDERS = 'REQUEST_ORDERS';
@@ -48,6 +66,20 @@ export function fetchOrders() {
 
 	}
 }
+
+export function fetchSingleOrder() {
+	return function (dispatch) { 
+		dispatch(requestSingleOrder());
+		return fetch('http://localhost:3001/api/order')
+			.then(response => response.json())
+			.then(json => {
+				dispatch(addOrder(json))
+			})
+			.catch(err => console.error("Error loading order!", err));
+
+	}
+}
+
 
 export const ActiveStates = {
 	UPDATING: 'UPDATING',

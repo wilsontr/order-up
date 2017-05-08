@@ -8,7 +8,7 @@ function orders(state = [], action) {
 		case ADD_ORDER:
 			return [
 				...state, 
-				action.props
+				action.order
 			];
 		case CLEAR_ORDER: 
 			return state.map((order) => {
