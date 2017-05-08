@@ -33,8 +33,8 @@ const HelpModal = ({ isOpen, onCancel, onSubmit }) => (
 		isOpen={isOpen}
 		style={customStyles}
 		contentLabel="Close the kitchen?">
-		<div className="text-cnter" {...container}>
-			<p>Are you sure you want to close the kitchen?</p>
+		<div className="text-center modal-content" {...container}>
+			<p className="modal-message">Are you sure you want to close the kitchen?</p>
 			<div {...buttonRow}>
 			
 				<button 
