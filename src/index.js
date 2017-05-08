@@ -8,8 +8,7 @@ import { createLogger } from 'redux-logger';
 import App from './App';
 import orderApp from './reducers';
 import './index.css';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
+import 'bootswatch/lumen/bootstrap.css';
 
 const loggerMiddleware = createLogger();
 

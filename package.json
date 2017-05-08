@@ -5,6 +5,7 @@
   "dependencies": {
     "babel-polyfill": "^6.23.0",
     "bootstrap": "^3.3.7",
+    "bootswatch": "^3.3.7",
     "concurrently": "^3.4.0",
     "glamor": "^2.20.25",
     "hapi": "^16.1.1",

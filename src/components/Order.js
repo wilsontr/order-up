@@ -11,8 +11,9 @@ let contentsStyle = css({
 });
 
 let labelStyle = css({
-	'margin-top': '0.5rem',
-	'margin-bottom': 0
+	'margin-top': '1rem',
+	'margin-bottom': 0,
+	'font-weight': 'bold'
 });
 
 let buttonRow = css({
@@ -24,6 +25,7 @@ const Order = ({ id, customerName, customerAddress, courierName, pickupETA, onBu
 		<div className="panel panel-default">
 			<div className="panel-heading">Order #{id}</div>
 			<div {...contentsStyle}>
+				<label {...labelStyle}>Customer</label>
 				<div>{customerName}</div>
 				<div>{customerAddress}</div>
 				<label {...labelStyle}>Courier</label>
