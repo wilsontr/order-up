@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Order from './Order';
 import { css } from 'glamor';
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'	
+import './transitions.css'
 
 let style = css({
 	'listStyleType': 'none',
@@ -11,13 +13,22 @@ let style = css({
 
 const OrderTray = ({ orders = [], onOrderClick }) => (
 	<ul {...style} className="row">
-		{ orders.map( order => 
-			<Order 
-				key={order.id}
-				{...order}
-				onClick={() => onOrderClick(order.id)}
-			/>
-		)}
+		<CSSTransitionGroup
+			transitionName="order"
+			transitionAppear={true}
+			transitionLeave={true}
+			transitionEnter={true}
+			transitionAppearTimeout={10}
+			transitionEnterTimeout={500}
+            transitionLeaveTimeout={300}>
+			{ orders.map( order => 
+				<Order 
+					key={order.id}
+					{...order}
+					onClick={() => onOrderClick(order.id)}
+				/>
+			)}
+		</CSSTransitionGroup>
 	</ul>
 );
 
