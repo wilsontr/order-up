@@ -24,3 +24,5 @@ const OutstandingOrders = connect(
 	mapStateToProps, 
 	mapDispatchToProps, 
 )(OrderTray);
+
+export default OutstandingOrders;

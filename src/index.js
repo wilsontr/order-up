@@ -2,7 +2,6 @@ import 'babel-polyfill'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
-import { fetchOrders } from './actions';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
@@ -20,10 +19,6 @@ const store = createStore(
 		thunkMiddleware,
 		loggerMiddleware
 	)
-);
-
-store.dispatch(fetchOrders()).then(() => 
-	console.log(store.getState())
 );
 
 ReactDOM.render(

@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { ADD_ORDER, CLEAR_ORDER, SET_ACTIVE_STATE, ActiveStates } from './actions.js';
+import { ADD_ORDER, CLEAR_ORDER, SET_ACTIVE_STATE, RECEIVE_ORDERS, ActiveStates } from './actions.js';
 import _ from 'lodash';
 
 
@@ -19,6 +19,8 @@ function orders(state = [], action) {
 				}
 				return order;
 			});
+		case RECEIVE_ORDERS: 
+			return _.concat(state, action.orders);
 		default: 
 			return state;
 	}

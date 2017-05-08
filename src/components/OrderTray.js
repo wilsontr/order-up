@@ -1,14 +1,22 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Order from './Order';
+import { css } from 'glamor';
 
-const OrderTray = ({ orders, onCardClick }) => (
-	<ul>
+let style = css({
+	'list-style-type': 'none',
+	'padding': '2rem',
+	'display': 'block'
+});
+
+const OrderTray = ({ orders = [], onOrderClick }) => (
+	<ul {...style} className="row">
 		{ orders.map( order => 
 			<Order 
 				key={order.id}
 				{...order}
 				onClick={() => onOrderClick(order.id)}
-			/> //</>
+			/>
 		)}
 	</ul>
 );

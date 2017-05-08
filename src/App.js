@@ -1,21 +1,39 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { connect } from 'react-redux'
+import OrderTray from './components/OrderTray';
+import { fetchOrders } from './actions';
+import PropTypes from 'prop-types';
+
 
 class App extends Component {
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchOrders());
+  }
+
   render() {
+    const { orders } = this.props;
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className="container-fluid">
+        <OrderTray orders={orders}/>
       </div>
     );
   }
 }
 
-export default App;
+App.propTypes = {
+  orders: PropTypes.array.isRequired,
+  activeState: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired
+}
+
+function mapStateToProps(state) {
+  const { orders, activeState } = state;
+  return {
+    orders, 
+    activeState
+  }
+}
+
+export default connect(mapStateToProps)(App);

@@ -1,14 +1,50 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { css } from 'glamor';
 
-const Order = ({ id, customerName, customerAddress, courierName, pickupETA }) => (
-	<li>
+let orderStyle = css({
+	'display': 'block'
+});
+
+let contentsStyle = css({
+	'padding': '1.5rem'
+});
+
+let labelStyle = css({
+	'margin-top': '0.5rem',
+	'margin-bottom': 0
+});
+
+let buttonRow = css({
+	'margin-top': '1rem'
+});
+
+const Order = ({ id, customerName, customerAddress, courierName, pickupETA, onButtonClick }) => (
+	<li className="col-md-3 col-sm-4" {...orderStyle}>
 		<div className="panel panel-default">
 			<div className="panel-heading">Order #{id}</div>
+			<div {...contentsStyle}>
+				<div>{customerName}</div>
+				<div>{customerAddress}</div>
+				<label {...labelStyle}>Courier</label>
+				<div>{courierName}</div>
+				<label {...labelStyle}>ETA</label>
+				<div>{pickupETA}</div>
+				<div className="text-center" {...buttonRow}>
+					<button 
+						className="btn btn-primary" 
+						onClick={e => {
+							onButtonClick(id)
+						}}>
+							Picked Up
+					</button>
+				</div>				
+			</div>
 		</div>
 	</li>
 );
 
-Card.propTypes = {
+Order.propTypes = {
 	id: PropTypes.number.isRequired,
 	customerName: PropTypes.string.isRequired,
 	customerAddress: PropTypes.string.isRequired,
