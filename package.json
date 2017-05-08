@@ -3,18 +3,22 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.16.1",
+    "babel-polyfill": "^6.23.0",
     "bootstrap": "^3.3.7",
     "concurrently": "^3.4.0",
+    "glamor": "^2.20.25",
     "hapi": "^16.1.1",
     "inflected": "^2.0.1",
+    "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
     "react": "^15.5.4",
     "react-bootstrap": "^0.31.0",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.4",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "redux-logger": "^3.0.1",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "react-scripts": "0.9.5"
@@ -26,5 +30,5 @@
     "eject": "react-scripts eject",
     "server": "nodemon server/server.js"
   },
-  "proxy": "http://localhost:3001"
+  "proxy": "http://localhost:3001/"
 }

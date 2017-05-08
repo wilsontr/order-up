@@ -1,19 +1,52 @@
 import _ from 'lodash';
+import fetch from 'isomorphic-fetch';	
 
-export const ADD_CARD = 'ADD_CARD';
-export const CLEAR_CARD = 'CLEAR_CARD';
+export const ADD_ORDER = 'ADD_ORDER';
+export function addOrder(props) {
+	return { type: 'ADD_ORDER', props };
+}
+
+export const CLEAR_ORDER = 'CLEAR_ORDER';
+export function clearOrder(id) {
+	return { type: 'CLEAR_ORDER', id };
+}
+
 export const SET_ACTIVE_STATE = 'SET_ACTIVE_STATE';
-
-export function addCard(props) {
-	return { type: 'ADD_CARD', props };
-}
-
-export function clearCard(id) {
-	return { type: 'CLEAR_CARD', id };
-}
-
 export function setActiveState(newState) {
 	return {type: 'SET_ACTIVE_STATE', newState};
+}
+
+export const REQUEST_ORDERS = 'REQUEST_ORDERS';
+function requestOrders() {
+	return {
+		type: REQUEST_ORDERS
+	}
+}
+
+export const RECEIVE_ORDERS = 'RECEIVE_ORDERS';
+function receiveOrders(json) {
+	if ( !json.length ) {
+		throw new Error ("No valid data in response JSON");
+	}
+
+	let orders = json;
+	return {
+		type: RECEIVE_ORDERS,
+		orders: orders
+	}
+}
+
+export function fetchOrders() {
+	return function (dispatch) { 
+		dispatch(requestOrders());
+		return fetch('http://localhost:3001/api/orders')
+			.then(response => response.json())
+			.then(json => {
+				dispatch(receiveOrders(json))
+			})
+			.catch(err => console.error("Error loading orders!", err));
+
+	}
 }
 
 export const ActiveStates = {

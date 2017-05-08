@@ -8,10 +8,16 @@ const apiHelpers = require('./api-helpers.js');
 const NAME_FILE = '../data/names.txt';
 const ETA_WINDOW = 30;
 
-var cardId = 1;
+var orderId = 1;
 var allNames = [];
 
-server.connection({ port: 3001, host: 'localhost' });
+server.connection({ 
+  port: 3001, 
+  host: 'localhost',
+  routes: {
+    cors: true
+  }
+});
 
 server.start((err) => {
   if ( err ) {
@@ -23,6 +29,26 @@ server.start((err) => {
   readNames(NAME_FILE).then((names) => {
     allNames = names.split('\n');
   });
+});
+
+server.route({ 
+  method: 'GET',
+  path: '/api/order',
+  handler: (request, reply) => {
+    reply(apiHelpers.makeOrder(orderId++, allNames, ETA_WINDOW));
+  }
+});
+
+server.route({ 
+  method: 'GET',
+  path: '/api/orders',
+  handler: (request, reply) => {
+    let orders = [];
+    for ( let i = 0; i < 15; i++ ) {
+      orders.push(apiHelpers.makeOrder(orderId++, allNames, ETA_WINDOW));
+    }
+    reply(orders);
+  }
 });
 
 function readNames(nameFile) {
@@ -42,23 +68,3 @@ function readNames(nameFile) {
     }
   });
 }
-
-server.route({ 
-  method: 'GET',
-  path: '/api/card',
-  handler: (request, reply) => {
-    reply(apiHelpers.makeCard(cardId++, allNames, ETA_WINDOW));
-  }
-});
-
-server.route({ 
-  method: 'GET',
-  path: '/api/cards',
-  handler: (request, reply) => {
-    let cards = [];
-    for ( let i = 0; i < 15; i++ ) {
-      cards.push(apiHelpers.makeCard(cardId++, allNames, ETA_WINDOW));
-    }
-    reply(cards);
-  }
-});

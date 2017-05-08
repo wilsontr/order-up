@@ -22,7 +22,7 @@ function getRandomETA(etaWindow) {
   return momentDate;
 }
 
-function makeCard(id, names, etaWindow) {
+function makeOrder(id, names, etaWindow) {
   return {
     id: id,
     customerName: getRandomName(names),
@@ -34,5 +34,5 @@ function makeCard(id, names, etaWindow) {
 }
 
 module.exports = {
-  makeCard
+  makeOrder
 };
