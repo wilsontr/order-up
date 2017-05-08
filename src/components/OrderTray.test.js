@@ -39,7 +39,7 @@ describe('OrderTray', () => {
 		expect(wrapper.find('.order-card').length).toBe(2);
 	});
 
-	test('onClick', () => {
+	test('click event', () => {
 		const onOrderClick = jest.fn();
 		const wrapper = mount(<OrderTray orders={mockOrders} onOrderClick={onOrderClick}/>);
 		const order = wrapper.find('.order-card').at('1');

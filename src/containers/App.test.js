@@ -18,7 +18,4 @@ describe('App', () => {
 		const wrapper = shallow(<App store={store}/>);
 	});
 
-	test('markup', () => {
-
-	});
 });
