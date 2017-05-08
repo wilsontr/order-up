@@ -1,55 +1,12 @@
 import { combineReducers } from 'redux';
-import { ADD_ORDER, CLEAR_ORDER, SET_ACTIVE_STATE, RECEIVE_ORDERS, SET_MODAL_OPEN, ActiveStates } from './actions.js';
-import _ from 'lodash';
-
-
-function orders(state = [], action) {
-	switch (action.type) {
-		case ADD_ORDER:
-			return [
-				...state, 
-				action.order
-			];
-		case CLEAR_ORDER: 
-			return state.map((order) => {
-				if ( order.id === action.id ) {
-					return _.assignIn({}, order, {
-						pickedUp: true
-					});
-				}
-				return order;
-			});
-		case RECEIVE_ORDERS: 
-			return _.concat(state, action.orders);
-		default: 
-			return state;
-	}
-}
-
-function activeState(state = ActiveStates.UPDATING, action) {
-	switch (action.type) {
-		case SET_ACTIVE_STATE:
-			return action.newState;
-		default: 
-			return state;
-	}	
-}
-
-function modalOpen(state = false, action) {
-	switch (action.type) {
-		case SET_MODAL_OPEN:
-			return action.modalOpen;
-		default:
-			return state;
-	}
-}
-
-
+import { orders, activeState, modalOpen } from './reducer-methods';
 
 const orderApp = combineReducers({
 	orders, 
 	activeState,
 	modalOpen
 });
+
+console.log(orderApp);
 
 export default orderApp;

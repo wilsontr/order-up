@@ -34,5 +34,8 @@ function makeOrder(id, names, etaWindow) {
 }
 
 module.exports = {
-  makeOrder
+  makeOrder,
+  getRandomETA,
+  getRandomAddress,
+  getRandomName
 };
