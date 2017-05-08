@@ -64,7 +64,7 @@ export function fetchOrders() {
 export function fetchSingleOrder() {
 	return function (dispatch) { 
 		dispatch(requestSingleOrder());
-		return fetch('http://localhost:3001/api/order')
+		return fetch('http://localhost:3001/api/single-order')
 			.then(response => response.json())
 			.then(json => {
 				dispatch(addOrder(json))

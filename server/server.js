@@ -6,9 +6,9 @@ const _ = require('lodash');
 const apiHelpers = require('./api-helpers.js');
 
 const NAME_FILE = '../data/names.txt';
-const ETA_WINDOW = 30;
+const ETA_WINDOW = 50;
+const ORDERS_BATCH = 5;
 
-var orderId = 1;
 var allNames = [];
 
 server.connection({ 
@@ -33,23 +33,32 @@ server.start((err) => {
 
 server.route({ 
   method: 'GET',
-  path: '/api/order',
+  path: '/api/orders',
   handler: (request, reply) => {
-    reply(apiHelpers.makeOrder(orderId++, allNames, ETA_WINDOW));
+    let orders = [];
+    for ( let i = 0; i < ORDERS_BATCH; i++ ) {
+      orders.push(apiHelpers.makeOrder(getOrderId(), allNames, ETA_WINDOW));
+    }
+    reply(orders);
   }
 });
 
 server.route({ 
   method: 'GET',
-  path: '/api/orders',
+  path: '/api/single-order',
   handler: (request, reply) => {
-    let orders = [];
-    for ( let i = 0; i < 15; i++ ) {
-      orders.push(apiHelpers.makeOrder(orderId++, allNames, ETA_WINDOW));
-    }
-    reply(orders);
+    let newOrder = apiHelpers.makeOrder(getOrderId(), allNames, ETA_WINDOW);
+    reply(newOrder);
   }
 });
+
+var getOrderId = (function () {
+    var i = 1;
+
+    return function () {
+        return i++;
+    }
+})();
 
 function readNames(nameFile) {
   return new Promise((resolve, reject) => {
