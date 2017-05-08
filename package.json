@@ -7,7 +7,9 @@
     "bootstrap": "^3.3.7",
     "concurrently": "^3.4.0",
     "hapi": "^16.1.1",
+    "inflected": "^2.0.1",
     "lodash": "^4.17.4",
+    "moment": "^2.18.1",
     "react": "^15.5.4",
     "react-bootstrap": "^0.31.0",
     "react-dom": "^15.5.4",
@@ -22,7 +24,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "server": "nodemon src/server.js"
+    "server": "nodemon server/server.js"
   },
   "proxy": "http://localhost:3001"
 }
