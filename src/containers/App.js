@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import OrderTray from '../components/OrderTray';
-import { fetchOrders, clearOrder, fetchSingleOrder } from '../actions';
+import HelpButton from '../components/HelpButton';
+import HelpModal from '../components/HelpModal';
+import { fetchOrders, clearOrder, fetchSingleOrder, setModalOpen, setActiveState, ActiveStates } from '../actions';
 import PropTypes from 'prop-types';
 
 const ORDER_INTERVAL = 15000;
@@ -12,6 +14,9 @@ class App extends Component {
     super(props);
     this.handleOrderClick = this.handleOrderClick.bind(this);
     this.handleInterval = this.handleInterval.bind(this);
+    this.handleHelpClick = this.handleHelpClick.bind(this);
+    this.handleModalSubmit = this.handleModalSubmit.bind(this);
+    this.handleModalCancel = this.handleModalCancel.bind(this);
   }
 
   componentDidMount() {
@@ -26,23 +31,44 @@ class App extends Component {
 
   handleOrderClick(orderId) {
     const { dispatch } = this.props;
-    console.log('order', orderId);
     dispatch(clearOrder(orderId));
+  }
+
+  handleHelpClick() {
+    const { dispatch } = this.props;
+    dispatch(setModalOpen(true));
+  }
+
+  handleModalCancel() {
+    const { dispatch } = this.props;
+    dispatch(setModalOpen(false));    
+  }
+
+  handleModalSubmit() {
+    const { dispatch } = this.props;
+    dispatch(setActiveState(ActiveStates.STOPPED));   
+    dispatch(setModalOpen(false));   
   }
 
   handleInterval() {
     const { dispatch } = this.props;
-    console.log('interval');
-    dispatch(fetchSingleOrder());
+    if ( this.props.activeState === ActiveStates.UPDATING ) {
+      dispatch(fetchSingleOrder());  
+    }
   }
 
   render() {
-    const { orders } = this.props;
+    const { orders, modalOpen } = this.props;
     return (
       <div className="container-fluid">
+        <HelpButton onClick={this.handleHelpClick}/>
         <OrderTray 
           orders={orders} 
           onOrderClick={this.handleOrderClick}/>
+        <HelpModal 
+          onSubmit={this.handleModalSubmit}
+          onCancel={this.handleModalCancel}
+          isOpen={modalOpen}/>
       </div>
     );
   }
@@ -51,6 +77,7 @@ class App extends Component {
 App.propTypes = {
   orders: PropTypes.array.isRequired,
   activeState: PropTypes.string.isRequired,
+  modalOpen: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired
 }
 
@@ -59,10 +86,11 @@ const getOutstandingOrders = (orders) => {
 }
 
 function mapStateToProps(state) {
-  const { orders, activeState } = state;
+  const { orders, activeState, modalOpen } = state;
   return {
     orders: getOutstandingOrders(orders), 
-    activeState
+    activeState,
+    modalOpen
   }
 }
 

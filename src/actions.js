@@ -1,6 +1,11 @@
 import _ from 'lodash';
 import fetch from 'isomorphic-fetch';	
 
+export const SET_MODAL_OPEN = 'SET_MODAL_OPEN';
+export function setModalOpen(modalOpen) {
+	return { type: 'SET_MODAL_OPEN', modalOpen };
+}
+
 export const ADD_ORDER = 'ADD_ORDER';
 export function addOrder(order) {
 	return { type: 'ADD_ORDER', order };
@@ -20,17 +25,6 @@ export const REQUEST_SINGLE_ORDER = 'REQUEST_SINGLE_ORDER';
 function requestSingleOrder() {
 	return {
 		type: REQUEST_SINGLE_ORDER
-	}
-}
-export const RECEIVE_SINGLE_ORDER = 'RECEIVE_SINGLE_ORDER';
-function receiveSingleOrder(json) {
-	if ( !json.id ) {
-		throw new Error ("No valid data in response JSON");
-	}
-
-	return {
-		type: RECEIVE_SINGLE_ORDER,
-		order: json
 	}
 }
 

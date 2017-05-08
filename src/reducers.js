@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { ADD_ORDER, CLEAR_ORDER, SET_ACTIVE_STATE, RECEIVE_ORDERS, ActiveStates } from './actions.js';
+import { ADD_ORDER, CLEAR_ORDER, SET_ACTIVE_STATE, RECEIVE_ORDERS, SET_MODAL_OPEN, ActiveStates } from './actions.js';
 import _ from 'lodash';
 
 
@@ -35,11 +35,21 @@ function activeState(state = ActiveStates.UPDATING, action) {
 	}	
 }
 
+function modalOpen(state = false, action) {
+	switch (action.type) {
+		case SET_MODAL_OPEN:
+			return action.modalOpen;
+		default:
+			return state;
+	}
+}
+
 
 
 const orderApp = combineReducers({
 	orders, 
-	activeState
+	activeState,
+	modalOpen
 });
 
 export default orderApp;
