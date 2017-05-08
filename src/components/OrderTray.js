@@ -12,7 +12,7 @@ let style = css({
 });
 
 const OrderTray = ({ orders = [], onOrderClick }) => (
-	<ul {...style} className="row">
+	<ul {...style} className="row order-tray">
 		<CSSTransitionGroup
 			transitionName="order"
 			transitionAppear={true}

@@ -41,7 +41,7 @@ describe('Order', () => {
 		it ('fires its onClick function when the button is clicked', () => {
 			const button = wrapper.find('.btn.btn-primary');
 			button.simulate('click');
-			expect(onClick).toHaveBeenCalled();			
+			expect(onClick).toHaveBeenCalledWith(1);			
 		})
 	});
 });

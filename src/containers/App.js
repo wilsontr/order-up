@@ -6,7 +6,7 @@ import HelpModal from '../components/HelpModal';
 import { fetchOrders, clearOrder, fetchSingleOrder, setModalOpen, setActiveState, ActiveStates } from '../actions';
 import PropTypes from 'prop-types';
 
-const ORDER_INTERVAL = 3000;
+const ORDER_INTERVAL = 15000;
 
 class App extends Component {
 

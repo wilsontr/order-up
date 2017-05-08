@@ -21,7 +21,7 @@ let buttonRow = css({
 });
 
 const Order = ({ id, customerName, customerAddress, courierName, pickupETA, onClick }) => (
-	<li className="col-md-3 col-sm-4" {...orderStyle}>
+	<li className="col-md-3 col-sm-4 order-card" {...orderStyle}>
 		<div className="panel panel-default">
 			<div className="panel-heading">Order #<span className="order-id">{id}</span></div>
 			<div {...contentsStyle}>
